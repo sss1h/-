@@ -36,13 +36,19 @@ namespace WindowsFormsApp1
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.texthour = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textminute = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.texthour)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textminute)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Location = new System.Drawing.Point(317, 287);
+            this.button1.Location = new System.Drawing.Point(307, 339);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(139, 67);
             this.button1.TabIndex = 0;
@@ -103,12 +109,58 @@ namespace WindowsFormsApp1
             this.label4.TabIndex = 6;
             this.label4.Text = "JLU本科生每日自动打卡";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(281, 267);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(45, 20);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Time";
+            // 
+            // texthour
+            // 
+            this.texthour.Location = new System.Drawing.Point(374, 265);
+            this.texthour.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.texthour.Name = "texthour";
+            this.texthour.Size = new System.Drawing.Size(44, 27);
+            this.texthour.TabIndex = 9;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(424, 265);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(13, 20);
+            this.label6.TabIndex = 10;
+            this.label6.Text = ":";
+            // 
+            // textminute
+            // 
+            this.textminute.Location = new System.Drawing.Point(443, 265);
+            this.textminute.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.textminute.Name = "textminute";
+            this.textminute.Size = new System.Drawing.Size(41, 27);
+            this.textminute.TabIndex = 11;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(845, 450);
+            this.ClientSize = new System.Drawing.Size(739, 450);
+            this.Controls.Add(this.textminute);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.texthour);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -119,6 +171,8 @@ namespace WindowsFormsApp1
             this.Name = "Form1";
             this.Text = "Start";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.texthour)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textminute)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -133,6 +187,11 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown texthour;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown minute;
+        private System.Windows.Forms.NumericUpDown textminute;
     }
 }
 

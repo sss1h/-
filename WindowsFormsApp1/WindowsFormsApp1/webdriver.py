@@ -1,19 +1,14 @@
-import sys
-
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 from time import sleep
+import sys
+
+wait_time = 3
 
 
+def sign_in(username, password):
 
-
-# username = 'lipan2118'
-# password = 'Lp262783'
-
-def daka(username, password):
-
-
-    driver = webdriver.Chrome(r"C:\Users\No.6\Desktop\WindowsFormsApp1\WindowsFormsApp1\chromedriver.exe")
+    driver = webdriver.Chrome()
     driver.get('https://ehall.jlu.edu.cn')
     i = driver.find_element_by_id('username')
     i.send_keys(username)
@@ -23,30 +18,50 @@ def daka(username, password):
     sub = driver.find_element_by_id('login-submit')
     sub.click()
     sleep(1)
-    tab = driver.find_element_by_link_text('本科生每日健康打卡')
-    tab.click()
+    try:
+        driver.find_element_by_link_text('本科生每日健康打卡').click()
+    except Exception as e:
+        print('user name or password incorrect,plz check ! ')
+        driver.close()
+        return
+
     handles = driver.window_handles
-    cur = handles[-1]
-    driver.switch_to.window(cur)
-    print('switch succesful ')
-    sleep(2)
-    but = driver.find_element_by_id('V1_CTRL28').click()
-
-    with open('check.html', 'wb') as f:
-        src = driver.page_source
-        f.write(src.encode('utf-8'))
-    sleep(1)
-    s = driver.find_elements_by_class_name('command_button_content')
-    for t in s:
-        if t.text == '提交':
-            t.click()
+    driver.switch_to.window(handles[-1])
+    interval = 0
+    while interval <= wait_time:
+        try:
+            sleep(interval)
+            driver.find_element_by_xpath(
+                '//div[label[font="正常 "]]/input[1]').click()
+            s = driver.find_elements_by_class_name('command_button_content')
+            for t in s:
+                if t.text == '提交':
+                    t.click()
+                    break
             break
-    sleep(1)
-    driver.find_elements_by_tag_name('button')[-2].click()
-    sleep(1)
-    driver.quit()
-    print('page parse successful ')
-    exit()
+        except Exception:
+            interval += 1
+    if interval > wait_time:
+        print('network connction error,plz check your network status')
+        driver.quit()
+        return
 
-# daka(username, password)
-daka(sys.argv[1], sys.argv[2])
+    interval = 0
+    while interval < wait_time:
+        try:
+            sleep(interval)
+            buts = driver.find_elements_by_tag_name('button')
+            buts[-2].click()
+            break
+        except Exception:
+            interval += 1
+    if interval > wait_time:
+        print('confirm button not captured ! ')
+        driver.quit()
+        return
+    print('auto sign-in completed ! ')
+    driver.quit()
+
+
+if __name__ == "__main__":
+    sign_in(sys.argv[1], sys.argv[2])

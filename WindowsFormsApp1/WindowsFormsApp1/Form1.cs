@@ -29,8 +29,15 @@ namespace WindowsFormsApp1
                 string path = @"C:\Users\No.6\Desktop\WindowsFormsApp1\WindowsFormsApp1\webdriver.py";//py文件路径
                 string username = textusername.Text.Trim();
                 string password = textpassword.Text.Trim();
-                StartTest(path, username, password);
+
+                string hour = texthour.Text.Trim();
+                string min = textminute.Text.Trim();
                 
+                
+                StartTest(path, username, password, hour, min);
+                
+
+
             }
             catch (Exception e1)
             {
@@ -38,7 +45,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        public void StartTest(string pathAlg, string username, string password)
+        public void StartTest(string pathAlg, string username, string password, string hour, string  min)
         {
             
 
@@ -48,7 +55,7 @@ namespace WindowsFormsApp1
                 
             }
             string sArguments = pathAlg;
-            sArguments += " " + username + " " + password;//Python文件的路径用“/”划分比较常见
+            sArguments += " " + username + " " + password + " " + hour + " " + min;//Python文件的路径用“/”划分比较常见
 
            
 
