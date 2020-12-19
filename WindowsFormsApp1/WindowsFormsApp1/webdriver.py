@@ -17,6 +17,7 @@ def sign_in(username, password):
     passwd.send_keys(Keys.RETURN)
     sub = driver.find_element_by_id('login-submit')
     sub.click()
+    sleep(1)
     try:
         driver.find_element_by_link_text('本科生每日健康打卡').click()
     except Exception as e:
@@ -26,31 +27,39 @@ def sign_in(username, password):
 
     handles = driver.window_handles
     driver.switch_to.window(handles[-1])
-
     interval = 0
     while interval <= wait_time:
         try:
             sleep(interval)
             driver.find_element_by_xpath(
                 '//div[label[font="正常 "]]/input[1]').click()
-            font = driver.find_element_by_xpath('//a[nobr="提交"]').click()
+            s = driver.find_elements_by_class_name('command_button_content')
+            for t in s:
+                if t.text == '提交':
+                    t.click()
+                    break
+            break
         except Exception:
             interval += 1
     if interval > wait_time:
         print('network connction error,plz check your network status')
         driver.quit()
         return
+
     interval = 0
     while interval < wait_time:
         try:
             sleep(interval)
-            driver.find_elements_by_tag_name('button')[-2].click()
+            buts = driver.find_elements_by_tag_name('button')
+            buts[-2].click()
+            break
         except Exception:
             interval += 1
     if interval > wait_time:
         print('confirm button not captured ! ')
         driver.quit()
         return
+    print('auto sign-in completed ! ')
     driver.quit()
 
 
