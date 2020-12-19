@@ -3,12 +3,14 @@ import sys
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 from time import sleep
+from apscheduler.schedulers.blocking import BlockingScheduler
+from datetime import datetime
 
 
 
 
-# username = 'lipan2118'
-# password = 'Lp262783'
+
+
 
 def daka(username, password):
 
@@ -49,4 +51,10 @@ def daka(username, password):
     exit()
 
 # daka(username, password)
-daka(sys.argv[1], sys.argv[2])
+# daka(sys.argv[1], sys.argv[2])
+# BlockingScheduler
+scheduler = BlockingScheduler()
+# scheduler.add_job(daka, 'cron', day_of_week = '0-6', hour = 18, minute = 14, args=['liuhao2118', 'Liuhao043758'])
+
+scheduler.add_job(daka, 'cron', day_of_week = '0-6', hour = int(sys.argv[3]), minute = int(sys.argv[4]), args=[sys.argv[1], sys.argv[2]])
+scheduler.start()
