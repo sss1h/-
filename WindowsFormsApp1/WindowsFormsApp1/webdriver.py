@@ -1,13 +1,18 @@
+import sys
+
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 from time import sleep
-import sys
-
-wait_time = 3
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 
-def sign_in(username, password):
 
+
+
+
+
+def daka(username, password):
+    wait_time = 3
     driver = webdriver.Chrome()
     driver.get('https://ehall.jlu.edu.cn')
     i = driver.find_element_by_id('username')
@@ -63,5 +68,9 @@ def sign_in(username, password):
     driver.quit()
 
 
-if __name__ == "__main__":
-    sign_in(sys.argv[1], sys.argv[2])
+
+
+# BlockingScheduler
+scheduler = BlockingScheduler()
+scheduler.add_job(daka, 'cron', day_of_week = '0-6', hour = int(sys.argv[3]), minute = int(sys.argv[4]), args=[sys.argv[1], sys.argv[2]])
+scheduler.start()
